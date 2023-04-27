@@ -17,7 +17,15 @@ public class Day22_TestNGAnnotations {
     @BeforeClass: Herbir class'tan önce bir kez çalışır
     @AfterClass: Herbir class'tan sonra bir kez çalışır
     @BeforeMethod: Herbir @Test  annotation'ı öncesi bir kez çalışır.(JUnit @Before annotation'ı gibi)
-    @AfterMethod: Herbir @Test  annotation'ı sonrası bir kez çalışır.(JUnit @After annotation'ı gibi)
+    @AfterMethod: Herbir @Test  annotation'ı sonrası bir kez çalışır.
+ ------------
+    Test NG'de  test methodları alfabetik sıraya göre çalışır.
+    @Test(priority = 1) Test casleride öncelikli çalıştırma için kullanuılır.
+    Not: priority kullanılmayan testlerin varsıyalım priority değeri 0'dır
+    ------------
+    @Ignore: @Test caseleri atlamak için kullanılır
+    @Test(enable=false) @Test caseleri kullanıma kapatmak için kullanılır
+
 
      */
 
@@ -72,7 +80,7 @@ public class Day22_TestNGAnnotations {
     }
 
 
-    @Test
+    @Test(priority = 10)
     public void test01() {
         System.out.println("Test 1");
     }
@@ -86,7 +94,7 @@ public class Day22_TestNGAnnotations {
     public void test03() {
         System.out.println("Test 3");
     }
-
+    @Ignore
     @Test
     public void test04() {
         System.out.println("Test 4");
@@ -97,12 +105,12 @@ public class Day22_TestNGAnnotations {
         System.out.println("Test 5");
     }
 
-    @Test
+    @Test(priority = -1)
     public void test06() {
         System.out.println("Test 6");
     }
 
-    @Test
+    @Test(enabled = false)
     public void test07() {
         System.out.println("Test 7");
     }
