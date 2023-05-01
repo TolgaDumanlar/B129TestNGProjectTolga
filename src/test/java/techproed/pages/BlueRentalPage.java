@@ -30,4 +30,23 @@ public class BlueRentalPage {
         public WebElement logOut;
         @FindBy(xpath = "//*[@class='ajs-button ajs-ok']")
         public WebElement areYouSure;
+
+        @FindBy(xpath = "//*[@name='car']")
+        public WebElement aracSecimi;
+        @FindBy (xpath = "(//*[@class='form-control is-invalid'])[1]")
+        public WebElement pickUp;
+
+        @FindBy (xpath = "(//*[@class='form-control is-invalid'])[2]")
+        public WebElement dropOff;
+        @FindBy (xpath = "(//*[@class='form-control is-invalid'])[3]")
+        public WebElement pickUpDate;
+        @FindBy (xpath = "(//*[@class='form-control is-invalid'])[4]")
+        public WebElement dropOffDate;
+        @FindBy (xpath = "(//*[@class='form-control'])[2]")
+        public WebElement dropOffTime;
+        @FindBy (xpath = "(//*[@class='form-control is-invalid'])[3]")
+        public WebElement pickUpTime;
+
+        @FindBy(xpath = "//*[@class='w-100 btn btn-primary btn-lg']")
+        public  WebElement continueReservation;
 }

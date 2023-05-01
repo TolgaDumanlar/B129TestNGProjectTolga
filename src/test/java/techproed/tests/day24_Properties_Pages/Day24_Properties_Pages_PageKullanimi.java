@@ -1,4 +1,4 @@
-package techproed.tests;
+package techproed.tests.day24_Properties_Pages;
 
 import org.testng.Assert;
 import org.testng.annotations.Test;

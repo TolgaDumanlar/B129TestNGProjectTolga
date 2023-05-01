@@ -24,6 +24,7 @@ public class PositiveTest {
         Keys.TAB,ConfigReader.getProperty("pass"),Keys.ENTER);
 
         Assert.assertEquals(blueRentalPage.verify.getText(),"Jack Nicholson");
+        Driver.closeDriver();
 
     }
 }
