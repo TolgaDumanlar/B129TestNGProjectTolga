@@ -13,7 +13,7 @@ public class BlueRentalPage {
         public BlueRentalPage(){
                 PageFactory.initElements(Driver.getDriver(),this);
         }
-        @FindBy(xpath = "(//*[@role='button'])[1]")
+        @FindBy(xpath = "//*[@class='btn btn-primary btn-sm']")
         public WebElement login;
         @FindBy(xpath = "//*[@id='formBasicEmail']")
         public WebElement email;
@@ -30,6 +30,10 @@ public class BlueRentalPage {
         public WebElement logOut;
         @FindBy(xpath = "//*[@class='ajs-button ajs-ok']")
         public WebElement areYouSure;
+
+
+//-------------------------------------------------------------------------------
+
 
         @FindBy(xpath = "//*[@name='car']")
         public WebElement aracSecimi;

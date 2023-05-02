@@ -80,7 +80,7 @@ public class Day22_TestNGAnnotations {
     }
 
 
-    @Test(priority = 10)
+    @Test(priority = 10,groups = "Regression1")
     public void test01() {
         System.out.println("Test 1");
     }
@@ -94,8 +94,8 @@ public class Day22_TestNGAnnotations {
     public void test03() {
         System.out.println("Test 3");
     }
-    @Ignore
-    @Test
+    //@Ignore
+    @Test(groups = "Regression1")
     public void test04() {
         System.out.println("Test 4");
     }

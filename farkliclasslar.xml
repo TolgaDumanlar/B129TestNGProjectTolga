@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="All Test Suite" parallel="classes" thread-count="2">
+    <test verbose="2" preserve-order="true"
+          name="C:/Users/ASUS/IdeaProjects/B129TestNGProject/src/test/java/techproed/tests/day24_Properties_Pages/Day24_Properties_Pages_ClassWork.java">
+        <classes>
+            <class name="techproed.tests.day24_Properties_Pages.Day24_Properties_Pages_ClassWork">
+                <methods>
+                    <include name="test01"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+    <test verbose="2" preserve-order="true"
+          name="C:/Users/ASUS/IdeaProjects/B129TestNGProject/src/test/java/techproed/tests/day26_DataProvider/C01_DataProviderTest1.java">
+        <classes>
+            <class name="techproed.tests.day26_DataProvider.C01_DataProviderTest1">
+                <methods>
+                    <include name="testName"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+</suite>
