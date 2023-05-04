@@ -10,8 +10,9 @@ import techproed.pages.BlueRentalPage;
 import techproed.utilities.ConfigReader;
 import techproed.utilities.Driver;
 import techproed.utilities.ExcelUtils;
+import techproed.utilities.ReusableMethods;
 
-public class C03_Positive {
+public class C03_Positive extends ReusableMethods {
 
     @DataProvider
     public Object[][] kullaniciBilgileri(){
@@ -32,6 +33,7 @@ public class C03_Positive {
 
         blueRentalPage.pickUp.sendKeys("istanbul", Keys.TAB,"Ankara",Keys.TAB,"03.04.2023",Keys.TAB,"1200",Keys.TAB,
                 "10.04.2023",Keys.TAB,"1200");
+        bekle(3);
 
         blueRentalPage.login.click();
         blueRentalPage.email.sendKeys(email,Keys.TAB,password,Keys.ENTER);

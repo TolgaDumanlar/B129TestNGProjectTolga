@@ -7,25 +7,30 @@ import techproed.pages.BlueRentalPage;
 import techproed.utilities.ConfigReader;
 import techproed.utilities.Driver;
 
-public class PositiveTest {
-    @Test
-    public void test01() {
-        /*
+public class PositiveTest01 {
+       /*
         Acceptance Criteria:
         Admin olarak, uygulamaya giriş yapabilmeliyim
         https://www.bluerentalcars.com/
         Admin email: jack@gmail.com
         Admin password: 12345
          */
+
+    @Test
+    public void test01() {
         Driver.getDriver().get(ConfigReader.getProperty("blueRentACarUrl"));
         BlueRentalPage blueRentalPage = new BlueRentalPage();
-
         blueRentalPage.login.click();
+
         blueRentalPage.email.sendKeys(ConfigReader.getProperty("email"),
-        Keys.TAB,ConfigReader.getProperty("pass"),Keys.ENTER);
+                Keys.TAB,ConfigReader.getProperty("pass"),Keys.ENTER);
+
+        Assert.assertTrue(blueRentalPage.verify.isDisplayed());
 
         Assert.assertEquals(blueRentalPage.verify.getText(),"Jack Nicholson");
-        Driver.closeDriver();
+
 
     }
+
+
 }

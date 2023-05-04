@@ -13,9 +13,12 @@ public class BlueRentalPage {
         public BlueRentalPage(){
                 PageFactory.initElements(Driver.getDriver(),this);
         }
+
+
         @FindBy(xpath = "//*[@class='btn btn-primary btn-sm']")
         public WebElement login;
-        @FindBy(xpath = "//*[@id='formBasicEmail']")
+
+        @FindBy(id = "formBasicEmail")
         public WebElement email;
 
         @FindBy(xpath = "//*[@id='formBasicPassword']")
@@ -53,4 +56,7 @@ public class BlueRentalPage {
 
         @FindBy(xpath = "//*[@class='w-100 btn btn-primary btn-lg']")
         public  WebElement continueReservation;
+
+        @FindBy(xpath = "//*[@role='alert']")
+        public  WebElement uyariMesaji;
 }

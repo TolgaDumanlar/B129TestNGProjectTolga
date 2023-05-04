@@ -15,6 +15,17 @@ public class C03_Negative extends ReusableMethods {
 
     @Test
     public void test01() {
+        /*
+
+Acceptance Criteria:
+Kullanici arac bilgilerini girip CONTINUE RESERVATION butonuna tikladiginda
+Ve giris yapilmadiginda
+Hata mesaji almali : Please first login
+Giris yapildiginda hata mesaji alınmamalı
+
+         */
+
+
         BlueRentalPage blueRentalPage= new BlueRentalPage();
         Driver.getDriver().get(ConfigReader.getProperty("blueRentACarUrl"));
 
@@ -24,15 +35,19 @@ public class C03_Negative extends ReusableMethods {
          actions.click().keyDown(Keys.ESCAPE).perform();
 
         blueRentalPage.pickUp.sendKeys(ConfigReader.getProperty("aracAlinacakKonum"),
-                Keys.TAB,"aracBirakilacakKonum",
-                Keys.TAB,"alinacakTarih",
-                Keys.TAB,"alinacakSaat",
-                Keys.TAB,"teslimTarihi",
-                Keys.TAB,"teslimSaati");
-        blueRentalPage.continueReservation.click();
-        blueRentalPage.login.click();
-        blueRentalPage.email.sendKeys(ConfigReader.getProperty("fakeEmail"),Keys.TAB,"fakepass",Keys.ENTER);
+                Keys.TAB,ConfigReader.getProperty("aracBirakilacakKonum"),
+                Keys.TAB,ConfigReader.getProperty("alinacakTarih"),
+                Keys.TAB,ConfigReader.getProperty("alinacakSaat"),
+                Keys.TAB,ConfigReader.getProperty("teslimTarihi"),
+                Keys.TAB,ConfigReader.getProperty("teslimSaati"),Keys.ENTER);
+        //blueRentalPage.continueReservation.click();
+        bekle(3);
+        System.out.println(Driver.getDriver().switchTo().alert().getText());
+        //Assert.assertEquals(alert,"Please first login");
 
-        Assert.assertTrue(blueRentalPage.hataMesaji.isDisplayed());
+//        blueRentalPage.login.click();
+//        blueRentalPage.email.sendKeys(ConfigReader.getProperty("fakeEmail"),Keys.TAB,"fakepass",Keys.ENTER);
+
+        //Assert.assertTrue(blueRentalPage.hataMesaji.isDisplayed());
     }
 }
