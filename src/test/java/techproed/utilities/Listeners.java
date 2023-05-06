@@ -1,35 +1,63 @@
 package techproed.utilities;
-
-import org.testng.ITestContext;
-import org.testng.ITestListener;
-import org.testng.ITestResult;
-
-import static techproed.utilities.ReusableMethods.tumSayfaResmi;
-
-public class Listeners implements ITestListener {
-
-    public  void onStart(ITestContext context){
-        System.out.println("onStart()==> Tüm testlerden önce bir kez çalışır(Class'tan önce)");
+import org.testng.*;
+import org.testng.annotations.ITestAnnotation;
+import java.lang.reflect.Constructor;
+import java.lang.reflect.Method;
+public class Listeners implements ITestListener,IRetryAnalyzer, IAnnotationTransformer {
+    /*
+    Listeners; TestNG de bir test'in durumunu ve sonucunu izleyen ve bu duruma yanıt veren bir yapıdır.
+    Testlerin passed ve failed olma durumlarını, başlangıç ve bitişini takip eder ve raporlayabilir.
+        Bunun için TestNG den ITestListener arayüzünü(interface) kullanırız. Oluşturduğumuz Listeners
+    class'ına ITestListener arayüzündeki methodları Override etmek için implements ederiz
+     */
+    @Override
+    public void onStart(ITestContext context) {//@BeforeClass gibi
+        System.out.println("onStart Methodu -> Tüm testlerden önce tek bir sefer çağrılır "+context.getName());
     }
-
-    public  void onFinish(ITestContext context){
-        System.out.println("onFinish()==> Tüm testlerden sonra bir kez çalışır(Class'tan sonra)");
+    @Override
+    public void onFinish(ITestContext context) {
+        System.out.println("onFinish Methodu -> Tüm testlerden sonra tek bir sefer çağrılır "+context.getName());
     }
-
-    public void onTestStart(ITestResult result){
-        System.out.println("onTestStart()==> Her bir @Test'ten önce bir kez çalışır");
+    @Override
+    public void onTestStart(ITestResult result) {//@Before gibi
+        System.out.println("onTestStart Methodu -> Her bir test'ten önce tek bir sefer çağrılır "+result.getName());
     }
-
-    public void onTestSuccess(ITestResult result){
-        System.out.println("onTestSuccess()==> Sadece PASS olan testlerden sonra çalışır");
+    @Override
+    public void onTestSuccess(ITestResult result) {
+        System.out.println("onTestSuccess Methodu -> PASSED olan testlerden sonra tek bir sefer çağrılır "+result.getName());
     }
-
-    public void onTestFailure(ITestResult result){
-        System.out.println("onTestFailure()==> Sadece FAIL olan testlerden sonra çalışır");
-        tumSayfaResmi();
+    @Override
+    public void onTestFailure(ITestResult result) {
+        System.out.println("onTestFailure Methodu -> FAILED olan testlerden sonra tek bir sefer çağrılır "+result.getName());
+        ReusableMethods.tumSayfaResmi(result.getName());
     }
-
-    public void onTestSkipped(ITestResult result){
-        System.out.println("onTestSkipped()==> Sadece SKIP olan testlerden sonra çalışır");
+    @Override
+    public void onTestSkipped(ITestResult result) {
+        System.out.println("onTestSkipped Methodu -> SKIP(atlanan) olan testlerden sonra tek bir sefer çağrılır "+result.getName());
+    }
+    private int retryCount = 0;
+    private static final int maxRetryCount = 1;
+    @Override
+    public boolean retry(ITestResult result) {
+        if (retryCount < maxRetryCount) {
+            retryCount++;
+            return true;
+        }
+        return false;
+    }
+    /*
+    Bu method sadece FAIL olan test case'leri tekrar çalıştırır
+    maxRetryCount ek olarak çalisma sayısıdır. Bu örnekte Fail olan test (maxRetryCount = 1) normal bir kere
+    çalıştıktan sonra fail olursa 1 kez daha çalışacaktır.
+     */
+    @Override
+    public void transform(ITestAnnotation annotation, Class testClass, Constructor testConstructor, Method testMethod) {
+        /*
+            Bu methodun amacı; test notasyonlarını, sınıfları, cons.ları ve methodları transform(dönüştürme) etmemize
+        olanak sağlar
+            Bu method sayesinde Listeners sınıfını .xml dosyasında kullanabileceğiz ve istediğimiz class'ları fail
+        olma durumunda listeners sınıfı retry methodunu kullanarak istediğimiz kadar tekrar çalıştırabileceğiz.
+         */
+        annotation.setRetryAnalyzer(Listeners.class);
     }
 }
